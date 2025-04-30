@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Advice Generator</title>
   <style>
+ * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Segoe UI', sans-serif;
       background-color: #fdf6f0;
@@ -16,7 +20,6 @@
       min-height: 100vh;
       margin: 0;
       padding: 20px;
-      box-sizing: border-box;
       text-align: center;
     }
 
@@ -35,9 +38,7 @@
       border-radius: 30px;
       background: linear-gradient(135deg, #ffe6f0, #e0f7fa);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
       color: #333;
-      word-wrap: break-word;
     }
 
     button#adviceBtn {
@@ -50,14 +51,10 @@
       cursor: pointer;
       box-shadow: 0 4px 15px rgba(255, 128, 171, 0.4);
       transition: transform 0.2s ease, background-color 0.3s ease;
+      margin-top: 10px;
     }
-
-    button#adviceBtn:hover {
-      background-color: #ff5e99;
-      transform: scale(1.05);
-    }
-
     /* --- Mobile Responsiveness --- */
+   
     @media (max-width: 600px) {
       h1 {
         font-size: 1.5em;
@@ -71,8 +68,6 @@
       button#adviceBtn {
         width: 100%;
         max-width: 300px;
-        font-size: 1em;
-        padding: 12px;
       }
     }
   </style>
