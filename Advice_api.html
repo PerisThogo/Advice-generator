@@ -1,89 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Advice Generator</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advice Generator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fdf6f0;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
 
-        <style>
-            body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #fdf6f0;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            }
-        
-            h1 {
-            font-size: 2em;
-            color: #ff80ab;
-            margin-bottom: 20px;
-            }
-        
-                    p#advice {
-            font-size: 1.2em;
-            margin: 20px;
-            max-width: 500px;
-            text-align: center;
-            padding: 20px;
-            border-radius: 30px; /* round edges */
-            background: linear-gradient(135deg, #ffe6f0, #e0f7fa); /* soft pink to blue */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            color: #333;
-            }
+    h1 {
+      font-size: 2em;
+      color: #ff80ab;
+      margin-bottom: 20px;
+    }
 
-        
-            button#adviceBtn {
-            padding: 12px 24px;
-            font-size: 1em;
-            color: white;
-            background-color: #ff80ab;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 128, 171, 0.4);
-            transition: transform 0.2s ease, background-color 0.3s ease;
-            }
-        
-            button#adviceBtn:hover {
-            background-color: #ff5e99;
-            transform: scale(1.05);
-            }
-        </style>
-        
-    </head>
-    <body>
-            <h1>˗ˏˋ ♡ ˎˊ˗ Random Advice</h1>
-            <p id="advice">click the button for a catchy advice.....</p>
-            <button id="adviceBtn">Give me Advice</button>
+    p#advice {
+      font-size: 1.2em;
+      margin: 20px auto;
+      width: 100%;
+      max-width: 500px;
+      padding: 20px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #ffe6f0, #e0f7fa);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      color: #333;
+      word-wrap: break-word;
+    }
 
-            <script>
+    button#adviceBtn {
+      padding: 12px 24px;
+      font-size: 1em;
+      color: white;
+      background-color: #ff80ab;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 128, 171, 0.4);
+      transition: transform 0.2s ease, background-color 0.3s ease;
+    }
 
-                        const adviceText = document.getElementById("advice");
-                const getAdviceBtn = document.getElementById("adviceBtn");
+    button#adviceBtn:hover {
+      background-color: #ff5e99;
+      transform: scale(1.05);
+    }
 
-                getAdviceBtn.addEventListener("click", function () {
-                // Show loading text while fetching
-                adviceText.innerText = "Loading...";
+    /* --- Mobile Responsiveness --- */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5em;
+      }
 
-                // Fetch advice from API
-                fetch("https://api.adviceslip.com/advice")
-                    .then(response => response.json()) // Convert response to JSON
-                    .then(data => {
-                    const advice = data.slip.advice;
-                    adviceText.innerText = `"${advice}"`; // Display advice
-                    })
-                    .catch(error => {
-                    adviceText.innerText = "Oops! Something went wrong.";
-                    console.error(error);
-                    });
-                });
+      p#advice {
+        font-size: 1em;
+        padding: 15px;
+      }
 
-            </script>
-    </body>
+      button#adviceBtn {
+        width: 100%;
+        max-width: 300px;
+        font-size: 1em;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>˗ˏˋ ♡ ˎˊ˗ Random Advice</h1>
+  <p id="advice">click the button for a catchy advice.....</p>
+  <button id="adviceBtn">Give me Advice</button>
+
+  <script>
+    const adviceText = document.getElementById("advice");
+    const getAdviceBtn = document.getElementById("adviceBtn");
+
+    getAdviceBtn.addEventListener("click", function () {
+      adviceText.innerText = "Loading...";
+
+      fetch("https://api.adviceslip.com/advice")
+        .then(response => response.json())
+        .then(data => {
+          const advice = data.slip.advice;
+          adviceText.innerText = `"${advice}"`;
+        })
+        .catch(error => {
+          adviceText.innerText = "Oops! Something went wrong.";
+          console.error(error);
+        });
+    });
+  </script>
+</body>
 </html>
